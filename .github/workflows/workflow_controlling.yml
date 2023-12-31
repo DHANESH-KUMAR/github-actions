@@ -19,4 +19,8 @@ jobs:
           - name: "Installing Dependencies"
             run: npm ci
           - name: "Run Test Command"
+            id: run-tests
             run: npm test
+          - name: Do something if test failed
+            if: ${{ steps.run-tests.outcome }} == 'failure'
+            run: echo "if test failed its need to run"
