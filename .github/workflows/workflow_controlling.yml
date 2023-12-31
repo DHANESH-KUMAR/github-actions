@@ -1,0 +1,22 @@
+name: Controlling Work Flow
+on:
+    push:
+     branches:
+        - master
+jobs:
+    testing:
+        name: Testing Job
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4  
+          - name: Cache Primes
+            id: cache-primes
+            uses: actions/cache@v3
+            with: 
+             path: ~/.npm
+             key: deps-node-modules-${{ hashFiles('**/package-lock.json')}}              
+          - name: "Installing Dependencies"
+            run: npm ci
+          - name: "Run Test Command"
+            run: npm test
