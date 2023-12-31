@@ -22,5 +22,5 @@ jobs:
             id: run-tests
             run: npm test
           - name: Do something if test failed
-            if: failure() &&  ${{ steps.run-tests.outcome }} == 'failure'
+            if: failure() && steps.run-tests.outcome == 'failure'
             run: echo "if test failed its need to run"
